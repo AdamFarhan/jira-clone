@@ -24,7 +24,9 @@ type AdditionalContext = {
     user: Models.User<Models.Preferences>;
   };
 };
-
+/**
+ * Insures that a user session is active and attaches user info to context
+ */
 export const sessionMiddleware = createMiddleware<AdditionalContext>(
   async (c, next) => {
     const client = new Client()
