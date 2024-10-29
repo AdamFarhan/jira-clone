@@ -24,6 +24,9 @@ export const WorkspaceSwitcher = () => {
           <SelectValue placeholder="No workspace selected" />
         </SelectTrigger>
         <SelectContent>
+          {workspaces?.documents.length === 0 && (
+            <p className="py-2 font-medium text-sm">No workspaces found.</p>
+          )}
           {workspaces?.documents.map((workspace) => (
             <SelectItem key={workspace.$id} value={workspace.$id}>
               <div className="flex justify-start items-center gap-3 font-medium">
