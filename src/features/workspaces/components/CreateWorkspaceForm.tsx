@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useRef } from "react";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -19,16 +20,17 @@ import {
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 import { createWorkspaceSchema } from "../schemas";
 import { useCreateWorkspace } from "../api/useCreateWorkspace";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
 }
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
+  const router = useRouter();
   const { mutate, isPending } = useCreateWorkspace();
   const inputRef = useRef<HTMLInputElement>(null);
   const form = useForm<z.infer<typeof createWorkspaceSchema>>({
@@ -46,8 +48,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     mutate(
       { form: finalValues },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           form.reset();
+          router.push(`/workspaces/${data.$id}`);
           // TODO: redirect to new workspace
         },
       }
