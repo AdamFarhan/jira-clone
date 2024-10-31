@@ -12,7 +12,8 @@ import {
 import { MemberRole } from "@/features/members/types";
 import { generateInviteCode } from "@/lib/utils";
 
-import { createWorkspaceSchema } from "../schemas";
+import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
+import { getMember } from "@/features/members/utils";
 
 const app = new Hono()
   /* Get Workspaces */
@@ -88,6 +89,64 @@ const app = new Hono()
       });
 
       return c.json({ data: workspace });
+    }
+  )
+  /* Update Workspace*/
+  .patch(
+    "/:workspaceId",
+    sessionMiddleware,
+    zValidator("form", updateWorkspaceSchema),
+    async (c) => {
+      const databases = c.get("databases");
+      const storage = c.get("storage");
+      const user = c.get("user");
+
+      const { workspaceId } = c.req.param();
+      const { name, image } = c.req.valid("form");
+
+      // Find the user's membership for the workspace they're trying to edit
+      const member = await getMember({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
+
+      // If the user is not a member of that workspace, or they do not have ADMIN roles in that workspace
+      // Prevent them from editing
+      if (!member || member.role !== MemberRole.ADMIN) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      let uploadedImageUrl: string | undefined;
+
+      if (image instanceof File) {
+        const file = await storage.createFile(
+          IMAGES_BUCKET_ID,
+          ID.unique(),
+          image
+        );
+        const arrayBuffer = await storage.getFilePreview(
+          IMAGES_BUCKET_ID,
+          file.$id
+        );
+        uploadedImageUrl = `data:image/png;base64,${Buffer.from(
+          arrayBuffer
+        ).toString("base64")}`;
+      } else {
+        uploadedImageUrl = image;
+      }
+
+      const newWorkspace = await databases.updateDocument(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId,
+        {
+          name,
+          imageUrl: uploadedImageUrl,
+        }
+      );
+
+      return c.json({ data: newWorkspace });
     }
   );
 export default app;

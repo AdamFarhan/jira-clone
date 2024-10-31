@@ -12,5 +12,6 @@ const app = new Hono().basePath("/api").get("/project/:projectId", (c) => {
 const routes = app.route("/auth", auth).route("/workspaces", workspaces);
 export const GET = handle(app);
 export const POST = handle(app);
+export const PATCH = handle(app);
 
 export type AppType = typeof routes;
