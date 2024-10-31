@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { getAuthedUser } from "@/features/auth/actions";
+import { getAuthedUser } from "@/features/auth/queries";
 import { CreateWorkspaceForm } from "@/features/workspaces/components/CreateWorkspaceForm";
 
 async function WorkspaceCreatePage() {

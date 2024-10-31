@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { getAuthedUser } from "@/features/auth/actions";
+import { getAuthedUser } from "@/features/auth/queries";
 import { SignInCard } from "@/features/auth/components/SignInCard";
 
 export default async function SignInPage() {

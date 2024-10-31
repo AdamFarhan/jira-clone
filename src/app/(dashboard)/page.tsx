@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { getAuthedUser } from "@/features/auth/actions";
-import { getWorkspaces } from "@/features/workspaces/actions";
+import { getAuthedUser } from "@/features/auth/queries";
+import { getWorkspaces } from "@/features/workspaces/queries";
 
 export default async function Home() {
   const user = await getAuthedUser();
