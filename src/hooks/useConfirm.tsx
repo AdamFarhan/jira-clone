@@ -10,11 +10,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export const useConfirm = (
-  title: string,
-  message: string,
-  variant: ButtonProps["variant"] = "primary"
-): [() => JSX.Element, () => Promise<unknown>] => {
+interface Props {
+  title: string;
+  message: string;
+  variant?: ButtonProps["variant"];
+}
+
+export const useConfirm = ({
+  message,
+  title,
+  variant = "primary",
+}: Props): [() => JSX.Element, () => Promise<unknown>] => {
   const [promise, setPromise] = useState<{
     resolve: (value: boolean) => void;
   } | null>(null);
