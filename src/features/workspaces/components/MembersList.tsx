@@ -23,7 +23,6 @@ import { useConfirm } from "@/hooks/useConfirm";
 
 import { useWorkspaceId } from "../hooks/useWorkspaceId";
 import { Workspace } from "../types";
-import { useGetWorkspaces } from "../api/useGetWorkspaces";
 
 type Props = {
   workspace: Workspace;
@@ -31,6 +30,7 @@ type Props = {
 export const MembersList = ({ workspace }: Props) => {
   const workspaceId = useWorkspaceId();
   const { data } = useGetMembers({ workspaceId });
+
   const [ConfirmDialog, confirm] = useConfirm({
     title: "Remove Member",
     message: "This member will be removed from the workspace",
