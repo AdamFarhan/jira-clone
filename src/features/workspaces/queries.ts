@@ -6,6 +6,7 @@ import { getMember } from "../members/utils";
 import { Workspace } from "./types";
 import { createSessionClient } from "@/lib/appwrite";
 
+/** Returns a list of workspaces the user is a member of */
 export const getWorkspaces = async () => {
   try {
     const { account, databases } = await createSessionClient();
@@ -37,6 +38,7 @@ export const getWorkspaces = async () => {
   }
 };
 
+/** Returns the full workspace to members */
 export const getWorkspace = async ({
   workspaceId,
 }: {
@@ -64,6 +66,30 @@ export const getWorkspace = async ({
     );
 
     return workspace;
+  } catch {
+    return null;
+  }
+};
+
+/** Returns basic information about a workspace to non members */
+export const getWorkspaceInfo = async ({
+  workspaceId,
+}: {
+  workspaceId: string;
+}) => {
+  try {
+    const { databases } = await createSessionClient();
+
+    const workspace = await databases.getDocument<Workspace>(
+      DATABASE_ID,
+      WORKSPACES_ID,
+      workspaceId
+    );
+
+    return {
+      name: workspace.name,
+      imageUrl: workspace.imageUrl,
+    };
   } catch {
     return null;
   }
