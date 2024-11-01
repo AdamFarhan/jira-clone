@@ -32,7 +32,7 @@ const routes = [
     activeIcon: SettingsIcon,
   },
   {
-    label: "Memebers",
+    label: "Members",
     href: "/members",
     icon: UsersIcon,
     activeIcon: UsersIcon,

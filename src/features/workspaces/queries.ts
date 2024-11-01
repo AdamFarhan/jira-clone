@@ -89,6 +89,7 @@ export const getWorkspaceInfo = async ({
     return {
       name: workspace.name,
       imageUrl: workspace.imageUrl,
+      inviteCode: workspace.inviteCode,
     };
   } catch {
     return null;
