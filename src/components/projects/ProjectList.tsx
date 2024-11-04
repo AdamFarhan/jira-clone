@@ -9,8 +9,7 @@ import { cn } from "@/lib/utils";
 import { useCreateProjectModal } from "@/features/projects/hooks/useCreateProjectModal";
 import { ProjectAvatar } from "@/features/projects/components/ProjectAvatar";
 
-export const Projects = () => {
-  const projectId = null; //TODO: add useGetProjectId() hook
+export const ProjectList = () => {
   const { open } = useCreateProjectModal();
   const workspaceId = useWorkspaceId();
   const { data } = useGetProjects({ workspaceId });
@@ -25,8 +24,8 @@ export const Projects = () => {
           onClick={open}
         />
       </div>
-      {data?.documents.map((project, index) => {
-        const href = `/workspaces/${workspaceId}/projects/${projectId}`;
+      {data?.documents.map((project) => {
+        const href = `/workspaces/${workspaceId}/projects/${project.$id}`;
         const isActive = pathname === href;
 
         return (
