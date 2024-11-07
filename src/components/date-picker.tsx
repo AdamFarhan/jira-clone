@@ -43,7 +43,6 @@ export const DatePicker = ({
         </Button>
       </PopoverTrigger>
       <PopoverContent>
-        Content
         <Calendar
           mode="single"
           selected={value}

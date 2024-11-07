@@ -32,7 +32,7 @@ import { MemberAvatar } from "@/features/members/components/MemberAvatar";
 import { ProjectAvatar } from "@/features/projects/components/ProjectAvatar";
 
 import { createTaskSchema } from "../schemas";
-import { useCreateTask } from "../api/api/useCreateTask";
+import { useCreateTask } from "../api/useCreateTask";
 import { TaskStatus } from "../types";
 
 interface CreateTaskFormProps {
