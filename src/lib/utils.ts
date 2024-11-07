@@ -14,3 +14,15 @@ export function generateInviteCode(length: number) {
   }
   return result;
 }
+
+/**
+ * Converts snake case to normal looking text
+ * @param str SNAKE_CASE_STRING
+ * @returns Snake Case String
+ */
+export function snakeCaseToTitleCase(str: string) {
+  return str
+    .toLowerCase()
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
