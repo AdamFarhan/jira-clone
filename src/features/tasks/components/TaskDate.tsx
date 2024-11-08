@@ -14,7 +14,7 @@ export const TaskDate: React.FC<TaskDateProps> = ({ value, className }) => {
 
   let textColor = "text-muted-foreground";
 
-  if (diffInDays <= 3) {
+  if (diffInDays <= 1) {
     textColor = "text-red-500";
   } else if (diffInDays <= 7) {
     textColor = "text-orange-500";
