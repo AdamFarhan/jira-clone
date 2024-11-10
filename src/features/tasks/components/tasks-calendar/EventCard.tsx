@@ -11,6 +11,7 @@ import { TaskStatus } from "../../types";
 
 interface EventCardProps {
   title: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   assignee: any;
   project: Project;
   status: TaskStatus;
