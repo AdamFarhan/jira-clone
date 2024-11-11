@@ -9,6 +9,7 @@ import {
 import { Task, TaskStatus } from "../../types";
 import { KanbanHeader } from "./KanbanHeader";
 import { KanbanCard } from "./KanbanCard";
+import { cn } from "@/lib/utils";
 
 const boards: TaskStatus[] = [
   TaskStatus.BACKLOG,
@@ -185,10 +186,11 @@ export const KanbanBoard = ({ data, onChange }: DataKanbanProps) => {
                         draggableId={task.$id}
                         index={index}
                       >
-                        {(provided) => (
+                        {(provided, snapshot) => (
                           <div
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
+                            className={cn(snapshot.isDragging && "shadow-lg")}
                             ref={provided.innerRef}
                           >
                             <KanbanCard task={task} />

@@ -32,6 +32,9 @@ export const useUpdateTask = () => {
       toast.success("Task updated");
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       queryClient.invalidateQueries({ queryKey: ["task", data.$id] });
+      queryClient.invalidateQueries({
+        queryKey: ["project-analytics", data.projectId],
+      });
     },
     onError: () => {
       toast.error("Failed to updated task");
