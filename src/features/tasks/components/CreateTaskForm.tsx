@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,7 +45,6 @@ export const CreateTaskForm = ({
   projectOptions,
   memberOptions,
 }: CreateTaskFormProps) => {
-  const router = useRouter();
   const workspaceId = useWorkspaceId();
   const { mutate, isPending } = useCreateTask();
   const form = useForm<z.infer<typeof createTaskSchema>>({
@@ -62,6 +60,7 @@ export const CreateTaskForm = ({
       {
         onSuccess: () => {
           form.reset();
+          onCancel?.();
           // TODO: Redirect to new task
         },
       }

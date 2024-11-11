@@ -22,13 +22,15 @@ import { MemberRole } from "@/features/members/types";
 import { useConfirm } from "@/hooks/useConfirm";
 
 import { useWorkspaceId } from "../hooks/useWorkspaceId";
-import { Workspace } from "../types";
+import { useGetWorkspace } from "../api/useGetWorkspace";
+import { PageLoader } from "@/components/page-loader";
+import { PageError } from "@/components/page-error";
 
-type Props = {
-  workspace: Workspace;
-};
-export const MembersList = ({ workspace }: Props) => {
+export const MembersList = () => {
   const workspaceId = useWorkspaceId();
+  const { data: workspace, isLoading: isWorkspaceLoading } = useGetWorkspace({
+    workspaceId,
+  });
   const { data } = useGetMembers({ workspaceId });
 
   const [ConfirmDialog, confirm] = useConfirm({
@@ -50,15 +52,16 @@ export const MembersList = ({ workspace }: Props) => {
   const handleDeleteMember = async (memberId: string) => {
     const ok = await confirm();
     if (!ok) return;
-    deleteMember(
-      { param: { memberId } },
-      {
-        onSuccess: () => {
-          window.location.reload();
-        },
-      }
-    );
+    deleteMember({ param: { memberId } });
   };
+
+  if (isWorkspaceLoading) {
+    return <PageLoader />;
+  }
+
+  if (!workspace) {
+    return <PageError message="Could not find workspace" />;
+  }
 
   const isPending = isUpdating || isDeleting;
   return (
