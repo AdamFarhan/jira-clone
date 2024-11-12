@@ -8,7 +8,7 @@ import { createAdminClient } from "@/lib/appwrite";
 import { DATABASE_ID, MEMBERS_ID } from "@/config";
 
 import { getMember } from "../utils";
-import { MemberRole } from "../types";
+import { Member, MemberRole } from "../types";
 
 const app = new Hono()
   /* Get all members of a given workspace */
@@ -33,9 +33,11 @@ const app = new Hono()
       }
 
       //Gets a list of user IDs that are members of the given workspace
-      const memberIds = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [
-        Query.equal("workspaceId", workspaceId),
-      ]);
+      const memberIds = await databases.listDocuments<Member>(
+        DATABASE_ID,
+        MEMBERS_ID,
+        [Query.equal("workspaceId", workspaceId)]
+      );
 
       const members = await Promise.all(
         memberIds.documents.map(async (member) => {

@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { getAuthedUser } from "@/features/auth/queries";
 import { getWorkspace } from "@/features/workspaces/queries";
+import { WorkspaceIdClient } from "./client";
 
 interface Props {
   params: {
@@ -16,7 +17,7 @@ async function WorkspaceIdPage({ params }: Props) {
   const workspace = await getWorkspace({ workspaceId: params.workspaceId });
   if (!workspace) redirect("/");
 
-  return <div>WorkspaceIdPage</div>;
+  return <WorkspaceIdClient />;
 }
 
 export default WorkspaceIdPage;
