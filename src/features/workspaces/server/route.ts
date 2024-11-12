@@ -71,7 +71,6 @@ const app = new Hono()
   })
   /* Get a Workspace's basic info */
   .get("/:workspaceId/info", sessionMiddleware, async (c) => {
-    const user = c.get("user");
     const databases = c.get("databases");
     const { workspaceId } = c.req.param();
 

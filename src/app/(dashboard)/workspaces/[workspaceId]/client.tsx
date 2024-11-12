@@ -5,7 +5,6 @@ import { useGetMembers } from "@/features/members/api/useGetMembers";
 import { useGetProjects } from "@/features/projects/api/useGetProjects";
 import { useWorkspaceId } from "@/features/workspaces/hooks/useWorkspaceId";
 import { useGetWorkspaceAnalytics } from "@/features/workspaces/api/useGetWorkspaceAnalytics";
-import { useCreateProjectModal } from "@/features/projects/hooks/useCreateProjectModal";
 
 import { PageLoader } from "@/components/page-loader";
 import { PageError } from "@/components/page-error";

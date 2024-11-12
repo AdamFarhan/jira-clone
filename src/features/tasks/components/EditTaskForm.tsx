@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,7 +26,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/date-picker";
 
-import { useWorkspaceId } from "@/features/workspaces/hooks/useWorkspaceId";
 import { MemberAvatar } from "@/features/members/components/MemberAvatar";
 import { ProjectAvatar } from "@/features/projects/components/ProjectAvatar";
 
@@ -48,8 +46,6 @@ export const EditTaskForm = ({
   memberOptions,
   initialValues,
 }: EditTaskFormProps) => {
-  const router = useRouter();
-  const workspaceId = useWorkspaceId();
   const { mutate, isPending } = useUpdateTask();
   const form = useForm<z.infer<typeof createTaskSchema>>({
     resolver: zodResolver(

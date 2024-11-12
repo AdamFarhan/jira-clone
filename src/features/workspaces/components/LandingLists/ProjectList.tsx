@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
-import { CalendarIcon, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 import { Project } from "@/features/projects/types";
-import { useCreateTaskModal } from "@/features/tasks/hooks/useCreateTaskModal";
 
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/dotted-separator";

@@ -22,7 +22,7 @@ export const InvalidInvite = () => {
           </CardTitle>
           <CardDescription>
             The code you are trying to provide does not match the invite code of
-            the workspace you're trying to join.
+            the workspace you&abpos;re trying to join.
           </CardDescription>
         </span>
       </CardHeader>

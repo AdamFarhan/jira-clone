@@ -7,6 +7,7 @@ import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useWorkspaceId } from "@/features/workspaces/hooks/useWorkspaceId";
+import { useProjectId } from "@/features/projects/hooks/useProjectId";
 
 import { useCreateTaskModal } from "../hooks/useCreateTaskModal";
 import { useGetTasks } from "../api/useGetTasks";
@@ -30,6 +31,8 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: Props) => {
     defaultValue: "kanban",
   });
   const workspaceId = useWorkspaceId();
+  const paramProjectId = useProjectId();
+
   const { open } = useCreateTaskModal();
 
   const { mutate: bulkUpdate } = useBulkUpdateTasks();
@@ -37,7 +40,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: Props) => {
     workspaceId,
     status,
     assigneeId,
-    projectId,
+    projectId: paramProjectId || projectId,
     dueDate,
     search,
   });

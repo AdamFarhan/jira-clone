@@ -7,7 +7,7 @@ import { MemberAvatar } from "@/features/members/components/MemberAvatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-import { Task, TaskStatus } from "../../types";
+import { Task } from "../../types";
 import { TaskDate } from "../TaskDate";
 import { snakeCaseToTitleCase } from "@/lib/utils";
 import { TaskActions } from "./TaskActions";

@@ -1,17 +1,11 @@
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
-import { CalendarIcon, Plus, Settings } from "lucide-react";
-
-import { Project } from "@/features/projects/types";
-import { useCreateTaskModal } from "@/features/tasks/hooks/useCreateTaskModal";
+import { Settings } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { useWorkspaceId } from "../../hooks/useWorkspaceId";
-import { useCreateProjectModal } from "@/features/projects/hooks/useCreateProjectModal";
-import { ProjectAvatar } from "@/features/projects/components/ProjectAvatar";
 import { Member } from "@/features/members/types";
 import { MemberAvatar } from "@/features/members/components/MemberAvatar";
 
